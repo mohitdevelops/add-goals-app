@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
 	Button,
 	FlatList,
+	Pressable,
 	ScrollView,
 	StyleSheet,
 	Text,
@@ -21,6 +22,7 @@ export default function App() {
 	}
 
 	const addGoalHandler = (goalsInput) => {
+		if (goalsInput === "") return;
 		setGoalsList((currentGoals) => [
 			...currentGoals,
 			{ text: goalsInput, id: Math.random().toString() },
@@ -40,9 +42,17 @@ export default function App() {
 
 	return (
 		<>
-			<StatusBar style="dark"/>
+			<StatusBar style="light" />
 			<View style={styles.container}>
-				<Button title="Add New Goal" color={"#2827CC"} onPress={addGoal} />
+				<View style={styles.addBtnBox}>
+					<Pressable
+						onPress={addGoal}
+						style={styles.addGoalBtn}
+						android_ripple={{ color: "#fff" }}
+					>
+						<Text style={{ color: "#fff", fontSize: 20, }}>Add New Goal</Text>
+					</Pressable>
+				</View>
 				{isModalVisible && (
 					<GoalInput
 						onAddGoal={addGoalHandler}
@@ -76,7 +86,7 @@ export default function App() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#03203C",
+		backgroundColor: "#23272A",
 		alignItems: "center",
 		justifyContent: "space-between",
 		padding: 20,
@@ -87,4 +97,22 @@ const styles = StyleSheet.create({
 		width: "100%",
 		padding: 20,
 	},
+	addBtnBox: {
+		marginTop: 50,
+		overflow: "hidden",
+		borderRadius: 100,
+	},
+	addGoalBtn: {
+		backgroundColor: "#7289DA",
+		paddingTop: 10,
+		paddingBottom: 10,
+		paddingRight: 30,
+		paddingLeft: 30,
+		borderRadius: 100,
+	},
 });
+
+//dark 23272A
+//main 7289DA
+//red DC143C
+//l 4682B4
